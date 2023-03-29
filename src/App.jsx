@@ -7,15 +7,18 @@ import Home from './Components/Home/Home';
 import SideCart from './Components/SIdeCart/SideCart';
 
 function App() {
+  const [watchTime,setWatchTime] = useState('');
   const handleWatchTime = (time) => {
     const previousWatchTime = JSON.parse(localStorage.getItem("watchTime"));
     if (previousWatchTime) {
       const sum = previousWatchTime + time;
       console.log(sum);
       localStorage.setItem("watchTime", sum);
+      setWatchTime(sum)
      
     } else {
       localStorage.setItem("watchTime", time);
+      setWatchTime(time)
      
     }
   };
@@ -27,7 +30,7 @@ function App() {
         <Home handleWatchTime={handleWatchTime} ></Home>
       </div>
       <div className="sideCart col-md-4 card">
-        <SideCart/>
+        <SideCart watchTime={watchTime} ></SideCart>
       </div>
      </div>
     </div>
